@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite annotations="BlueServices" name = "BlueServices" thread-count="2" data-provider-thread-count="2">
+    <test name = "Blue Services test">
+        <classes>
+            <class name="tests.Tests"/>
+        </classes>
+    </test>
+</suite>

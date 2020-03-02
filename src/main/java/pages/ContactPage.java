@@ -17,6 +17,7 @@ public class ContactPage {
     private Element detailsTxtField;
     private Element emailConfirmationRadioButton;
     private Element dataProcessingAgreementCheckbox;
+    private Element submitButton;
 
     public ContactPage() {
         businessClientRadioButton = new Element(By.xpath("//div[@class = 'grid-24'][2]"));
@@ -26,8 +27,9 @@ public class ContactPage {
         phoneTxtField = new Element(By.id("phone"));
         topicDropdownList = new Element(By.id("select2-subject-container"));
         detailsTxtField = new Element(By.id("body"));
-        emailConfirmationRadioButton = new Element(By.xpath("//input[@name= 'respond_type']"));
+        emailConfirmationRadioButton = new Element(By.cssSelector(".form__radio input[value = 'email']"));
         dataProcessingAgreementCheckbox = new Element(By.id("agreement_1"));
+        submitButton = new Element(By.cssSelector("button[type = 'submit']"));
     }
 
     public ContactPage openHomePage() {
@@ -60,8 +62,8 @@ public class ContactPage {
         return this;
     }
 
-    public ContactPage selectValueFromList(String value) {
-        topicDropdownList.selectFromList(value);
+    public ContactPage selectValueFromList(String listId, String value) {
+        topicDropdownList.selectFromListByVisibleText(By.id(listId), value);
         return this;
     }
 
@@ -71,13 +73,19 @@ public class ContactPage {
     }
 
     public ContactPage clickOnEmailResponseButton() {
-        emailConfirmationRadioButton.isDisplayed();
         emailConfirmationRadioButton.click();
         return this;
     }
 
-    public ContactPage checkDataProcessingAgreementCheckbox() {
+    public void checkDataProcessingAgreementCheckbox() {
         dataProcessingAgreementCheckbox.click();
-        return this;
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public boolean isSubmitButtonDisplayed() {
+        return submitButton.isDisplayed();
     }
 }
